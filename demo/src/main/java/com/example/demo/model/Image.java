@@ -1,10 +1,7 @@
 package com.example.demo.model;
 
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,26 +15,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="imagenes")
+@Table(name = "imagenes")
 @Entity
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Setter 
+    @Setter
     private String id;
-    private String url;
-    private Short prioridad;
-    private String tamanio;
-    private boolean responsiva;
-    
-    @JsonBackReference
-    @ManyToOne(fetch=FetchType.LAZY)
-    @Setter 
-    private Producto producto;
 
+    @Setter
+    private String url;
+
+    @Setter
+    private Short prioridad;
+
+    @Setter
+    private String tamanio;
+
+    @Setter
+    private boolean responsiva;
+
+    @JsonBackReference("producto-imagenes")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Setter
+    private Producto producto;
 }
